@@ -1,0 +1,142 @@
+<% if(currentUser.role === "student") { %>
+
+<div class="card container form border-0 rounded-0 shadow-sm px-3 py-4" id="checkup">
+    <h1>Request Leave</h1>
+    <form class="row g-3" action="/request_leave" method="post">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input disabled value="<%= currentUser.name %>" type="email" class="form-control" id="name">
+      </div>
+      <div class="col-md-6">
+        <label for="branch" class="form-label">Branch</label>
+        <input name="branch" type="text" class="form-control" id="branch">
+      </div>
+      <div class="col-12">
+        <label for="Address" class="form-label">Address</label>
+        <input name="address" type="text" class="form-control" id="Address" placeholder="Address">
+      </div>
+      <div class="col-md-6">
+          <label for="inputZip" class="form-label">From</label>
+          <input name="from" type="date" class="form-control" id="inputZip">
+      </div>
+      <div class="col-md-6">
+          <label for="inputZip" class="form-label">To</label>
+          <input name="to" type="date" class="form-control" id="inputZip">
+      </div>
+      <div class="col-md-6">
+        <label for="hostel" class="form-label">Hostel</label>
+        <select name="hostel" class="form-select" aria-label="Covid Reports">
+          
+            <% hostels.forEach((hostel) => { %>
+  
+              <% if(hostel.status === 'yes') {%>
+                <option value="<%= hostel.name %>"><%= hostel.name %></option>
+              <% } else { %>
+                <option disabled value="<%= hostel.name %>"><%= hostel.name %> - Not Sanitized</option>
+              <% } %>
+  
+            <% }) %>
+  
+          </select>
+      </div>
+      <div class="col-md-6">
+        <label for="mobile" class="form-label">Mobile no.</label>
+        <input name="mobileno" type="number" class="form-control" id="mobile">
+      </div>
+      <div class="col-md-6">
+        <label for="days" class="form-label">No. of days</label>
+        <input name="days" type="number" class="form-control" id="days">
+      </div>
+      <div class="row col-md-6 mt-5">
+        <div class="col-md-4">
+          <label for="covid" class="form-label">Covid Reports</label>
+        </div>
+        <div class="col-md-4">
+  
+          <select name="covid" class="form-select" aria-label="Covid Reports">
+            <option selected value="positive">Positive</option>
+            <option value="negative">Negative</option>
+          </select>
+        </div>
+        </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+  </form>
+  </div>
+  
+  <hr>
+  
+  <div>
+    <h1 class="mb-2">Requested Leave</h1>
+    <% leaves.forEach((leave) => { %>
+  
+        <% if(leave.user.id.equals(currentUser._id)){ %>
+            
+            <div class="card border-0 rounded-0 shadow-sm p-3 mb-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-10">
+                    <p><b>Branch</b> - <%= leave.branch %></p>
+                    <p><b>Address</b> - <%= leave.address %></p>
+                    <p><b>Between</b> -  <%= new Date(leave.between).toDateString() %></p>
+                    <p><b>To</b> - <%= new Date(leave.to).toDateString() %></p>
+                    <p><b>Hostel No</b> - <%= leave.hostel %></p>
+                    <p><b>Mobile No</b> - <%= leave.mobileno %></p>
+                    <p><b>Days</b> - <%= leave.days %></p>
+                    <p><b>Covid Reports</b> - <%= leave.covid %></p>
+                    </div>
+                    <div class="col-md-2">
+                        <% if(leave.status === 'approved'){ %>
+                        <h5 class="text-success"><i class="fa fa-check-circle"></i> Accepted</h5>
+                        <% } else if(leave.status === 'rejected'){ %>
+  
+                        <h5 class="text-danger"><i class="fa fa-times-circle"></i> Rejected</h5>
+                        <% }else{ %>
+  
+                        <h5 class="text-warning"><i class="fa fa-exclamation-circle"></i> Pending</h5>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+  
+        <% } %>
+    <% }) %>
+  </div>
+  
+<% } else { %>
+
+
+    <h1>Requested Leave</h1>
+    <% leaves.forEach((leave) => { %>
+
+        <% if(leave.college.id.equals(currentUser.college.id) && leave.status === 'pending'){ %>
+            
+            <div class="card border-0 rounded-0 shadow-sm p-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-10">
+                        <p><b>Name</b> - <%= leave.user.name %></p>
+                        <p><b>Branch</b> - <%= leave.branch %></p>
+                        <p><b>Address</b> - <%= leave.address %></p>
+                        <p><b>Between</b> -  <%= new Date(leave.from).toDateString() %></p>
+                        <p><b>To</b> - <%= new Date(leave.to).toDateString() %></p>
+                        <p><b>Hostel No</b> - <%= leave.hostel %></p>
+                        <p><b>Mobile No</b> - <%= leave.mobileno %></p>
+                        <p><b>Days</b> - <%= leave.days %></p>
+                        <p><b>Covid Reports</b> - <%= leave.covid %></p>
+                    </div>
+                    <div class="col-md-2">
+                        <form method="POST" action="/leave/<%= leave._id %>/approve?_method=PUT">
+                            <button type="submit" class="btn btn-success mb-2">Approve</button>
+                        </form>
+                        <form method="POST" action="/leave/<%= leave._id %>/reject?_method=PUT">
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+    <% }) %>
+
+    
+<% } %>

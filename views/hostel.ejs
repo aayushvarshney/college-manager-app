@@ -1,0 +1,55 @@
+
+<div class="card text-center container form border-0 rounded-0 shadow-sm px-3 py-5">
+    <h1 class="mb-2" style="font-weight: 700;">Add Hostel</h1>
+    <form class="row" action="/addhostel" method="post">
+        <div class="col-md-4 offset-md-3">
+            <input class="form-control mt-3" type="text" name="name" placeholder="Name">
+        </div>
+        <div class="col-md-2">
+        <div class="d-grid gap-2 pt-3">
+            <button type="submit" class="btn btn-success" type="button">Add</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<hr>
+
+<div>
+    <h1 class="mb-2">Hostels</h1>
+    
+    <% hostels.forEach((hostel) => { %>
+  
+        <% if(hostel.college.id.equals(currentUser.college.id)){ %>
+            
+            <div class="card border-0 rounded-0 shadow-sm p-3 mb-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-5">
+                        <p><b>Hostel Name</b> - <%= hostel.name %></p>
+                    </div>
+                    <div class="col-md-5">
+                        <% if(hostel.status === 'yes'){ %>
+                        
+                            <h5 class="text-success"><i class="fa fa-check-circle"></i> Sanitized</h5>
+
+                        <% }else{ %>
+  
+                            <h5 class="text-warning"><i class="fa fa-exclamation-circle"></i> Sanitization Pending</h5>
+
+                        <% } %>
+                    </div>
+                    <div class="col-md-2">
+                        <form method="POST" action="/hostel/<%= hostel._id %>/approve?_method=PUT">
+                            <button type="submit" class="btn btn-success mb-2">Sanitization Done</button>
+                        </form>
+                        <form method="POST" action="/hostel/<%= hostel._id %>/reject?_method=PUT">
+                            <button type="submit" class="btn btn-danger">Sanitization Needed</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+  
+        <% } %>
+    <% }) %>
+  </div>
+

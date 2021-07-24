@@ -1,0 +1,80 @@
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div style="position: relative;border: none;padding: 20px;margin-bottom: 40px;color: white;" class="card bg-success shadow">
+            <h3 class="mb-2">Total students vaccinated</h3>
+            <h4><%= users.reduce(function (n, person) { return n + (person.vaccine === 'yes' && person.college.id.equals(currentUser.college.id)); }, 0); %></h4>
+            <img style="position: absolute; bottom: 10px; right: 10px; width: 50px; height: 50px;" src="/img/vaccine.jpeg" alt="" srcset="">
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div style="position: relative;border: none;padding: 20px;margin-bottom: 40px;color: white;" class="card bg-primary shadow">
+            <h3 class="mb-2">Total Hostels Sanitized</h3>
+            <h4><%= hostels.reduce(function (n, hostel) { return n + (hostel.status === 'yes' && hostel.college.id.equals(currentUser.college.id)); }, 0); %></h4>
+            <img style="position: absolute; bottom: 10px; right: 10px; width: 50px; height: 50px;" src="/img/sanitize.jpeg" alt="" srcset="">
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card container form border-0 rounded-0 shadow-sm p-4 mb-3">
+            <div class="row">
+
+            <div class="col-md-10">
+                <h3>Recent Check-up requests</h3>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info float-right text-white">View all</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card container form border-0 rounded-0 shadow-sm p-4 mb-3">
+            <div class="row">
+
+            <div class="col-md-10">
+                <h3>Recent Arrival requests</h3>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info float-right text-white">View all</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card container form border-0 rounded-0 shadow-sm p-4 mb-3">
+            <div class="row">
+
+            <div class="col-md-10">
+                <h3>Recent Leave requests</h3>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info float-right text-white">View all</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card container form border-0 rounded-0 shadow-sm p-4 mb-3">
+            <div class="row">
+
+            <div class="col-md-10">
+                <h3>Recent Orders</h3>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info float-right text-white">View all</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+</div>

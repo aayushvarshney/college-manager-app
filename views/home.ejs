@@ -1,0 +1,46 @@
+<%- include('./partials/header.ejs'); -%>
+
+<div class="row g-0" id="sidebar">
+    <div class="col-2">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+        <a class="list-group-item list-group-item-action" id="list-reqcheckup-list" data-bs-toggle="list" href="#list-reqcheckup" role="tab" aria-controls="reqcheckup">Check-up</a>
+        <a class="list-group-item list-group-item-action" id="list-reqarrival-list" data-bs-toggle="list" href="#list-reqarrival" role="tab" aria-controls="reqarrival">Arrival</a>
+        <a class="list-group-item list-group-item-action" id="list-leave-list" data-bs-toggle="list" href="#list-leave" role="tab" aria-controls="leave">Leave</a>
+        <a class="list-group-item list-group-item-action" id="list-order-list" data-bs-toggle="list" href="#list-order" role="tab" aria-controls="order">Order</a>
+        <% if(currentUser.role === 'staff'){ %>
+        <a class="list-group-item list-group-item-action" id="list-hostel-list" data-bs-toggle="list" href="#list-hostel" role="tab" aria-controls="hostel">Hostel</a>
+        <a class="list-group-item list-group-item-action" id="list-vaccine-list" data-bs-toggle="list" href="#list-vaccine" role="tab" aria-controls="vaccine">Vaccination</a>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+          <%- include('./dashboard.ejs', {users: users, hostels: hostels}); -%>
+        </div>
+        <div class="tab-pane fade" id="list-reqcheckup" role="tabpanel" aria-labelledby="list-reqcheckup-list">
+            <%- include('./reqcheckup.ejs', {checkups: checkups}); -%>
+        </div>
+        <div class="tab-pane fade" id="list-reqarrival" role="tabpanel" aria-labelledby="list-reqarrival-list">
+            <%- include('./reqarrival.ejs', {arrivals: arrivals, hostels: hostels}); -%>
+        </div>
+        <div class="tab-pane fade" id="list-leave" role="tabpanel" aria-labelledby="list-leave-list">
+            <%- include('./reqleave.ejs', {leaves: leaves, hostels: hostels}); -%>
+        </div>
+        <div class="tab-pane fade" id="list-order" role="tabpanel" aria-labelledby="list-order-list">
+            <%- include('./reqorder.ejs', {orders: orders, hostels: hostels}); -%>
+        </div>
+        <% if(currentUser.role === 'staff'){ %>
+        <div class="tab-pane fade" id="list-hostel" role="tabpanel" aria-labelledby="list-hostel-list">
+          <%- include('./hostel.ejs', {hostels: hostels}); -%>
+        </div>
+        <div class="tab-pane fade" id="list-vaccine" role="tabpanel" aria-labelledby="list-vaccine-list">
+          <%- include('./vaccine.ejs', {users: users}); -%>
+        </div>
+        <% } %>
+      </div>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs'); -%>

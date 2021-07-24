@@ -1,0 +1,26 @@
+
+    <h1>Requested Checkups</h1>
+    <% checkups.forEach((checkup) => { %>
+
+        <% if(checkup.college.id.equals(currentUser.college.id) && checkup.status === 'pending'){ %>
+            
+            <div class="card border-0 rounded-0 shadow-sm p-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-10">
+                        <p><b>Name</b> - <%= checkup.user.name %></p>
+                        <p><b>Age</b> - <%= checkup.age %></p>
+                        <p><b>Symptoms</b> - <%= checkup.symptoms %></p>
+                    </div>
+                    <div class="col-md-2">
+                        <form method="POST" action="/checkup/<%= checkup._id %>/approve?_method=PUT">
+                            <button type="submit" class="btn btn-success mb-2">Approve</button>
+                        </form>
+                        <form method="POST" action="/checkup/<%= checkup._id %>/reject?_method=PUT">
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+    <% }) %>

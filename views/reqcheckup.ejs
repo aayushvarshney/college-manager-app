@@ -1,0 +1,87 @@
+<% if(currentUser.role === "student") { %>
+
+    <div class="card container form border-0 rounded-0 shadow-sm p-4" id="checkup">
+        <h1>Request Check-up</h1>
+        <form class="row g-3 mt-1" action="/request_checkup" method="post">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name</label>
+              <input disabled value="<%= currentUser.name %>" type="email" class="form-control" id="name">
+            </div>
+            <div class="col-md-6">
+              <label for="age" class="form-label">Age</label>
+              <input name="age" type="number" class="form-control" id="age">
+            </div>
+            <div class="col-md-12">
+                <label for="symptoms" class="form-label">Symptoms</label>
+                <textarea name="symptoms" class="form-control" id="symptoms" rows="3"></textarea>
+            </div>        
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+    <hr>
+    
+    <div>
+        <h1 class="mb-2">Requested Checkups</h1>
+        <% checkups.forEach((checkup) => { %>
+    
+            <% if(checkup.user.id.equals(currentUser._id)){ %>
+                
+                <div class="card border-0 rounded-0 shadow-sm p-3 mb-3">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-10">
+                        <p><b>Age</b> - <%= checkup.age %></p>
+                        <p><b>Symptoms</b> - <%= checkup.symptoms %></p>
+                        </div>
+                        <div class="col-md-2">
+                            <% if(checkup.status === 'approved'){ %>
+                            <h5 class="text-success"><i class="fa fa-check-circle"></i> Accepted</h5>
+                            <% } else if(checkup.status === 'rejected'){ %>
+    
+                            <h5 class="text-danger"><i class="fa fa-times-circle"></i> Rejected</h5>
+                            <% }else{ %>
+    
+                            <h5 class="text-warning"><i class="fa fa-exclamation-circle"></i> Pending</h5>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+    
+            <% } %>
+        <% }) %>
+    </div>
+          
+    <% } else { %>
+    
+    
+        <h1>Requested Checkups</h1>
+        <% checkups.forEach((checkup) => { %>
+    
+            <% if(checkup.college.id.equals(currentUser.college.id) && checkup.status === 'pending'){ %>
+                
+                <div class="card border-0 rounded-0 shadow-sm p-3">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-10">
+                            <p><b>Name</b> - <%= checkup.user.name %></p>
+                            <p><b>Age</b> - <%= checkup.age %></p>
+                            <p><b>Symptoms</b> - <%= checkup.symptoms %></p>
+                        </div>
+                        <div class="col-md-2">
+                            <form method="POST" action="/checkup/<%= checkup._id %>/approve?_method=PUT">
+                                <button type="submit" class="btn btn-success mb-2">Approve</button>
+                            </form>
+                            <form method="POST" action="/checkup/<%= checkup._id %>/reject?_method=PUT">
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+            <% } %>
+        <% }) %>
+        
+        
+    <% } %>
+

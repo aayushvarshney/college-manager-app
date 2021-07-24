@@ -1,0 +1,16 @@
+<%- include('./partials/header.ejs'); -%>
+
+
+<div class="card container form text-center shadow-sm" id="login">
+    <h1 style="font-weight: 700;">Login</h1>
+    <form action="/login" method="post">
+        <input class="form-control mt-5" type="text" name="username" placeholder="username">
+        <input class="form-control my-3" type="password" name="password" placeholder="password">
+        <div class="d-grid gap-2 pt-3">
+            <button type="submit" class="btn btn-primary" type="button">Login</button>
+        </div>
+    </form>
+</div>
+
+
+<%- include('./partials/footer.ejs'); -%>

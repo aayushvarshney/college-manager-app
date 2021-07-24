@@ -1,0 +1,30 @@
+
+    <h1>Requested Leave</h1>
+    <% leaves.forEach((leave) => { %>
+
+        <% if(leave.college.id.equals(currentUser.college.id) && leave.status === 'pending'){ %>
+            
+            <div class="card border-0 rounded-0 shadow-sm p-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-10">
+                        <p><b>Branch</b> - <%= leave.branch %></p>
+                        <p><b>Address</b> - <%= leave.address %></p>
+                        <p><b>Between</b> -  <%= new Date(leave.from).toDateString() %></p>
+                        <p><b>To</b> - <%= new Date(leave.to).toDateString() %></p>
+                        <p><b>Hostel No</b> - <%= leave.hostel %></p>
+                        <p><b>Mobile No</b> - <%= leave.mobileno %></p>
+                        <p><b>Covid Reports</b> - <%= leave.covid %></p>
+                    </div>
+                    <div class="col-md-2">
+                        <form method="POST" action="/leave/<%= leave._id %>/approve?_method=PUT">
+                            <button type="submit" class="btn btn-success mb-2">Approve</button>
+                        </form>
+                        <form method="POST" action="/leave/<%= leave._id %>/reject?_method=PUT">
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+    <% }) %>

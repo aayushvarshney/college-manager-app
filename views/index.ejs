@@ -1,0 +1,21 @@
+<%- include('./partials/header.ejs'); -%>
+
+    <div class="bg-light" style="background: url('/img/back.png') bottom; height: 100vh; background-size: cover;">
+
+        <div style="padding: 160px 80px; color: black; backdrop-filter: blur(3px); background-color: rgba(255, 255, 255, 0.3); height: 100%;">
+
+            
+            <h1 class="mb-3" style="font-weight: 700; font-size: 55px;">One step solution for all problems</h1>
+            <h1 class="mb-3" >#TheNewNormal</h1>
+            <a href="/home"><button class="btn btn-lg btn-primary rounded-pill text-white pt-2 px-4">Go to Dashboard</button></a>
+            
+        </div>
+
+        <div style="position: absolute; right: 100px; bottom: 50px; backdrop-filter: blur(2px); padding: 10px;">
+            <h1 class="mb-3" style="font-weight: 700; font-size: 40px;">Colleges Registered - <%= colleges.length %></h1>
+            <h1 class="mb-3" style="font-weight: 700; font-size: 40px;">Users Registered - <%= users.length %></h1>
+        </div>
+    </div>
+
+
+<%- include('./partials/footer.ejs'); -%>

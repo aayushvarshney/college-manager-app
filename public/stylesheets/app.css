@@ -1,0 +1,79 @@
+
+
+body{
+    overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+
+    background: #f8f9fc;
+
+}
+
+#sidebar{
+    height: 100vh;
+    overflow: hidden;
+    padding-top: 0px;
+    background: #f8f9fc;
+}
+
+#sidebar .col-2{
+    background: #ffffff;
+}
+
+#sidebar .col-10{
+    padding: 15px 25px 100px 25px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+#sidebar .list-group{
+    border-radius: 0;
+}
+
+#list-tab .list-group-item{
+
+    text-align: center;
+    font-weight: 700;
+    padding: 15px;
+    border: none;
+    
+}
+
+#login{
+
+    background: #ffffff;
+    margin: 80px auto;
+    padding: 80px;
+    width: 500px;
+    /* height: 500px; */
+    border: none;
+    border-radius: 0;
+
+}
+
+#login input{
+    padding: 10px;
+}
+
+#login button{
+    padding: 10px;
+}
+
+#register{
+
+    background: #ffffff;
+    margin: 10px auto;
+    padding: 80px;
+    width: 500px;
+    /* height: 500px; */
+    border: none;
+    border-radius: 0;
+
+}
+
+#register input{
+    padding: 10px;
+}
+
+#register button{
+    padding: 10px;
+}

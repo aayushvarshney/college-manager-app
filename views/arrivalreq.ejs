@@ -1,0 +1,30 @@
+
+    <h1>Requested Arrival</h1>
+    <% arrivals.forEach((arrival) => { %>
+
+        <% if(arrival.college.id.equals(currentUser.college.id) && arrival.status === 'pending'){ %>
+            
+            <div class="card border-0 rounded-0 shadow-sm p-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-10">
+                        <p><b>Branch</b> - <%= arrival.branch %></p>
+                        <p><b>Address</b> - <%= arrival.address %></p>
+                        <p><b>Between</b> -  <%= new Date(arrival.between).toDateString() %></p>
+                        <p><b>To</b> - <%= new Date(arrival.to).toDateString() %></p>
+                        <p><b>Hostel No</b> - <%= arrival.hostel %></p>
+                        <p><b>Mobile No</b> - <%= arrival.mobileno %></p>
+                        <p><b>Covid Reports</b> - <%= arrival.covid %></p>
+                        </div>
+                    <div class="col-md-2">
+                        <form method="POST" action="/arrival/<%= arrival._id %>/approve?_method=PUT">
+                            <button type="submit" class="btn btn-success mb-2">Approve</button>
+                        </form>
+                        <form method="POST" action="/arrival/<%= arrival._id %>/reject?_method=PUT">
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+    <% }) %>
