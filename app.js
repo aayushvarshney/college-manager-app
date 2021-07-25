@@ -60,7 +60,12 @@ app.get('/', (req, res) => {
                 console.log(err);
             }
             else{
-                res.render('index', { users: foundUser, colleges: foundCollege});
+                if(req.isAuthenticated()){
+
+                    res.redirect("/home");
+                }
+                else
+                    res.render('index', { users: foundUser, colleges: foundCollege});
             }
         })
     })
@@ -120,8 +125,12 @@ app.get('/register', (req, res) => {
 
     College.find({}, (err, colleges) => {
 
-        res.render("register", {colleges:colleges});
+        if(req.isAuthenticated()){
 
+            res.redirect("/home");
+        }
+        else
+            res.render("register", {colleges:colleges});
     })
 })
 
@@ -146,7 +155,12 @@ app.post('/register', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    res.render("login");
+    if(req.isAuthenticated()){
+
+        res.redirect("/home");
+    }
+    else
+        res.render("login");
 })
 
 app.post('/login', passport.authenticate('local',
