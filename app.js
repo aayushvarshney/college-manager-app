@@ -140,7 +140,7 @@ app.post('/register', (req, res) => {
             return res.render("register");
         }
         passport.authenticate('local')(req, res, ()=> {
-            res.redirect('/');
+            res.redirect('/home');
         })
     })
 })
@@ -151,7 +151,7 @@ app.get('/login', (req, res) => {
 
 app.post('/login', passport.authenticate('local',
     {
-        successRedirect: '/',
+        successRedirect: '/home',
         failureRedirect: '/login'
     }), (req, res) => {
 
